@@ -9,7 +9,7 @@ The following repository contains data files, scripts and documentation related 
 
 ### Packages used
 
-The following packages have been used in the project and are necessary to run the project's scripts: 
+NOTE! The following packages have been used in the project and are necessary to run the project's scripts: 
 - nltk (https://www.nltk.org/)
 - pickle (https://docs.python.org/3/library/pickle.html)
 - pandas (https://pandas.pydata.org/)
