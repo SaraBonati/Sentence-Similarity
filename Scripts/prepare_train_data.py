@@ -4,8 +4,7 @@ This script prepares the data for the online sentence similarity survey
 done as a seminar project (Natural Language Processing WS 2020/2021) @ 
 FU Berlin. We use phrases from the STS dataset: sentence pairs whose 
 length (in number of words) exceeds a threshold $l$ are excluded. Here we 
-set $l=35$.
-The 
+set $l=25$.
 
 @authors: Sara Bonati, Irina Kokoshko
 """
@@ -22,24 +21,24 @@ import pickle
 wdir        = os.getcwd()
 
 # import data (long sentences)
-sentences_long   = pd.read_csv(os.path.join(wdir,'STS.input.MSRpar.txt'),
+sentences_long   = pd.read_csv("../Data/STS.input.MSRpar.txt'),
                           sep=r'\t',
                           names=["SentenceA","SentenceB"],
                           header=None,
                           engine='python')
-gs_long          = pd.read_csv(os.path.join(wdir,'STS.gs.MSRpar.txt'),
+gs_long          = pd.read_csv("../Data/STS.gs.MSRpar.txt'),
                                header=None,
                                names=['Score'],
                                engine='python')
 data_long        = pd.concat([sentences_long, gs_long], axis=1, sort=False)
 
 # import data (short sentences)
-sentences_short  = pd.read_csv(os.path.join(wdir,'STS.input.MSRvid.txt'),
+sentences_short  = pd.read_csv("../Data/STS.input.MSRvid.txt'),
                                sep=r'\t',
                                names=["SentenceA","SentenceB"],
                                header=None,
                                engine='python')
-gs_short         = pd.read_csv(os.path.join(wdir,'STS.gs.MSRvid.txt'),
+gs_short         = pd.read_csv("../Data/STS.gs.MSRvid.txt'),
                                header=None,
                                names=['Score'],
                                engine='python')
@@ -54,12 +53,12 @@ data             = pd.concat([data_long, data_short],
 # LENGTH CHECK
 # ----------------------------------------------------------------------------
 # We consider max_length to be the number of words in a sentence!
-max_length         = 35
+max_length         = 25
 
 sent_listA = data['SentenceA'].to_list()
 sent_listA = np.array([s if len(nltk.word_tokenize(s)) < max_length else None for s in sent_listA])
 to_keep    = np.where(sent_listA!=None)
 data       = data.iloc[to_keep[0],:]
 
-file_name  = 'sentences.pkl'
+file_name  = 'sentences_shorter.pkl'
 data.to_pickle(file_name)
