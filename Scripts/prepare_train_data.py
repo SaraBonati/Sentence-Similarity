@@ -56,9 +56,20 @@ data             = pd.concat([data_long, data_short],
 max_length         = 25
 
 sent_listA = data['SentenceA'].to_list()
-sent_listA = np.array([s if len(nltk.word_tokenize(s)) < max_length else None for s in sent_listA])
-to_keep    = np.where(sent_listA!=None)
+sent_listB = data['SentenceB'].to_list()
+sent_list  = []
+for i in range(len(sent_listA)):
+    if len(nltk.word_tokenize(sent_listA[i])) < max_length and len(nltk.word_tokenize(sent_listB[i])) < max_length:
+        sent_list.append(sent_listA[i])
+    else:
+        sent_list.append(None)
+
+sent_list  = np.array([sent_listA[s] if len(nltk.word_tokenize(sent_listA[s])) < max_length and \
+                       len(nltk.word_tokenize(sent_listB[s])) < max_length else None for s in range(len(sent_listA))])
+to_keep    = np.where(sent_list!=None) #sentlistA before
 data       = data.iloc[to_keep[0],:]
+
+data.head()
 
 file_name  = 'sentences_shorter.pkl'
 data.to_pickle(file_name)
