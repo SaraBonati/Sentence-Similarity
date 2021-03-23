@@ -66,7 +66,7 @@ for i in range(len(sent_listA)):
 
 sent_list  = np.array([sent_listA[s] if len(nltk.word_tokenize(sent_listA[s])) < max_length and \
                        len(nltk.word_tokenize(sent_listB[s])) < max_length else None for s in range(len(sent_listA))])
-to_keep    = np.where(sent_list!=None) #sentlistA before
+to_keep    = np.where(sent_list!=None) 
 data       = data.iloc[to_keep[0],:]
 
 data.head()
