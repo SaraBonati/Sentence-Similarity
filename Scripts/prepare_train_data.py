@@ -21,24 +21,24 @@ import pickle
 wdir        = os.getcwd()
 
 # import data (long sentences)
-sentences_long   = pd.read_csv("../Data/STS.input.MSRpar.txt'),
+sentences_long   = pd.read_csv("../Data/STS.input.MSRpar.txt",
                           sep=r'\t',
                           names=["SentenceA","SentenceB"],
                           header=None,
                           engine='python')
-gs_long          = pd.read_csv("../Data/STS.gs.MSRpar.txt'),
+gs_long          = pd.read_csv("../Data/STS.gs.MSRpar.txt",
                                header=None,
                                names=['Score'],
                                engine='python')
 data_long        = pd.concat([sentences_long, gs_long], axis=1, sort=False)
 
 # import data (short sentences)
-sentences_short  = pd.read_csv("../Data/STS.input.MSRvid.txt'),
+sentences_short  = pd.read_csv("../Data/STS.input.MSRvid.txt",
                                sep=r'\t',
                                names=["SentenceA","SentenceB"],
                                header=None,
                                engine='python')
-gs_short         = pd.read_csv("../Data/STS.gs.MSRvid.txt'),
+gs_short         = pd.read_csv("../Data/STS.gs.MSRvid.txt",
                                header=None,
                                names=['Score'],
                                engine='python')
@@ -71,5 +71,5 @@ data       = data.iloc[to_keep[0],:]
 
 data.head()
 
-file_name  = 'sentences_shorter.pkl'
+file_name  = '../Data/sentences_shorter.pkl'
 data.to_pickle(file_name)
